@@ -1,0 +1,36 @@
+ion-avatar {
+    padding: 8px;
+
+    &.category-food {
+        background: #F0B323;
+    }
+
+    &.category-transportation {
+        background: #56C271;
+    }
+
+    &.category-clothing {
+        background: #C137A2;
+    }
+
+    ion-icon {
+        color: white;
+        height: 100%;
+        width: 100%;
+    }
+}
+
+::ng-deep ion-label div{
+    display: flex !important;
+    justify-content: space-between;
+
+    span {
+        display: flex;
+        flex-direction: column;
+
+        p {
+            text-transform: capitalize;
+            color: #707070;
+        }
+    }
+}

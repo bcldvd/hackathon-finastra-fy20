@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
       Family Pay
     </ion-title>
@@ -7,5 +7,9 @@
 </ion-header>
 
 <ion-content>
-  <ion-button expand="block" (click)="scanCode()">Pay</ion-button>
+    <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+      <ion-fab-button color="primary" (click)="scanCode()">
+        <ion-icon name="cart"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
 </ion-content>

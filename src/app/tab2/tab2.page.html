@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
       Current cart
     </ion-title>
@@ -29,7 +29,7 @@
       </ion-item-options>
     </ion-item-sliding>
 
-    <ion-toolbar color="primary" *ngIf="items?.length > 0">
+    <ion-toolbar color="secondary" *ngIf="items?.length > 0">
       <ion-title>Total : {{totalPrice | currency:'EUR'}}</ion-title>
       <ion-buttons slot="primary">
         <ion-button (click)="checkout()">Checkout</ion-button>
@@ -40,8 +40,8 @@
   </ion-list>
 
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-    <ion-fab-button color="danger" (click)="scanCode()">
-      <ion-icon name="add"></ion-icon>
+    <ion-fab-button color="primary" (click)="scanCode()">
+      <ion-icon name="barcode"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>

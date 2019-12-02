@@ -1,0 +1,33 @@
+<ion-header translucent>
+    <ion-toolbar color="primary">
+        <ion-title>{{childName}}'s transactions</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="dismissModal()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+    <ion-list>
+        <ng-container *ngFor="let txGroup of transactions">
+            <ion-list-header color="tertiary">
+                {{txGroup.date}}
+            </ion-list-header>
+            <ion-item *ngFor="let transaction of txGroup.transactions">
+                <ion-avatar slot="start" ngClass="category-{{transaction.category}}">
+                    <ion-icon [name]="mapCategoryToIonicIconName(transaction.category)"></ion-icon>
+                </ion-avatar>
+                <ion-label>
+                    <div>
+                        <span>
+                            <span>{{transaction.name}}</span>
+                            <p>{{transaction.category}}</p>
+                        </span>
+                        <h2>{{transaction.amount | currency:'EUR'}}</h2>
+                    </div>
+                </ion-label>
+            </ion-item>
+        </ng-container>
+    </ion-list>
+</ion-content>
