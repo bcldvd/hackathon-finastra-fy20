@@ -109,10 +109,12 @@ export class Tab3Page implements OnInit {
 
     const values = Object.keys(data).map(category => data[category]);
     values.forEach(val => this.total += val);
+    const max = Math.max(...values);
 
     Object.keys(data).forEach(category => this.labels.push({
       label: category,
       pct: ((data[category] / this.total) * 100).toFixed(2),
+      progressBarAmount: data[category]/max,
       amount: data[category]
     }));
 
