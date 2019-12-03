@@ -3,10 +3,12 @@ import { ModalController } from '@ionic/angular';
 import { MOCK_TRANSACTIONS, TransactionByDate } from '../../shared/data';
 
 const CATEGORY_IONIC_ICON_MAPPER = {
-  food: 'cafe',
-  transportation: 'train',
-  clothing: 'shirt'
-}
+  Food: 'cafe',
+  Transportation: 'train',
+  Clothing: 'shirt',
+  House: 'house',
+  Donation: 'heart'
+};
 
 @Component({
   selector: 'transactions-modal',

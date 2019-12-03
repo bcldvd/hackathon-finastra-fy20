@@ -15,7 +15,7 @@
                 {{txGroup.date}}
             </ion-list-header>
             <ion-item *ngFor="let transaction of txGroup.transactions">
-                <ion-avatar slot="start" ngClass="category-{{transaction.category}}">
+                <ion-avatar slot="start" ngClass="category-{{transaction.category | lowercase}}">
                     <ion-icon [name]="mapCategoryToIonicIconName(transaction.category)"></ion-icon>
                 </ion-avatar>
                 <ion-label>
