@@ -1,13 +1,51 @@
 .transaction-font {
   font-size: 12px;
+  &.pull-right {
+    float: right;
+  }
 }
 
-ion-row {
+.centered {
+  text-align: center;
+  &.text {
+    font-size: 14px;
+  }
+  &.amount {
+    font-weight: bold;
+    font-family: Futura;
+    font-size: 24px;
+  }
+}
+
+.transaction-row {
   height: 46px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
 }
 
 .expenses-header {
   padding: 0;
   opacity: 0.6;
   margin-bottom: 10px;
+}
+
+.category-name {
+  display: flex;
+}
+
+.vertical-line {
+  width: 1px;
+  height: 50px;
+  background :lightgray;
+  margin-top: 0;
+  position: relative;
+  margin-left: 10%;
+}
+
+.welcome-message {
+  --min-height: 100px;
+  .avatar {
+    width: 36px;
+  }
 }

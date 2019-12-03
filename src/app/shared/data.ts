@@ -49,7 +49,7 @@ export const MOCK_TRANSACTIONS: TransactionByDate[] = [
       {
         name: 'Uniqlo',
         category: 'Clothing',
-        amount: 14.99
+        amount: 34.99
       },
       {
         name: 'McDonalds',
@@ -59,17 +59,22 @@ export const MOCK_TRANSACTIONS: TransactionByDate[] = [
       {
         name: 'IKEA furniture',
         category: 'House',
-        amount: 120.05
+        amount: 60.05
       },
       {
         name: 'Dinner table',
         category: 'House',
-        amount: 55.99
+        amount: 25.99
       },
       {
         name: 'Sushi Ko',
         category: 'Food',
-        amount: 32.8
+        amount: 12.8
+      },
+      {
+        name: 'WWF',
+        category: 'Donation',
+        amount: 6.50
       }
     ]
   }

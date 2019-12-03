@@ -6,6 +6,8 @@ import { NO_CORDOVA } from '../shared/data';
 import { PaymentInitService } from '../shared/payment-init.service';
 import { MOCK_TRANSACTIONS, TransactionByDate } from '../shared/data';
 
+Chart.defaults.global.legend.labels.usePointStyle = true;
+
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
@@ -16,6 +18,7 @@ export class Tab3Page implements OnInit {
 
   private doughnutChart: Chart;
 
+  total: number = 0;
   transactions: TransactionByDate[];
 
   constructor(
@@ -36,21 +39,20 @@ export class Tab3Page implements OnInit {
       return acc;
     }, {})
 
-    let total = 0;
     const values = Object.keys(data).map(category => data[category]);
-    values.forEach(val => total += val);
+    values.forEach(val => this.total += val);
 
     let labels = [];
     Object.keys(data).forEach(category => labels.push({
       label: category,
-      pct: ((data[category] / total) * 100).toFixed(2)
+      pct: ((data[category] / this.total) * 100).toFixed(2)
     }))
 
     labels.sort((a, b) => b.pct - a.pct);
     values.sort((a, b) => b - a);
 
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
-      type: "doughnut",
+      type: 'doughnut',
       data: {
         labels: labels.map(item => `${item.label} ${item.pct}%`),
         datasets: [
@@ -58,18 +60,21 @@ export class Tab3Page implements OnInit {
             label: "Expenses",
             data: values,
             backgroundColor: [
-              "#694ed6",
-              "#c137a2",
-              "#e40046",
-              "#5bc1d7",
-              "#f0b323",
-              "#56c271",
-              "#ff8a3d"
+              "#5bc1d7", // ocean
+              "#d2d755", // lime
+              "#694ed6", // violet
+              "#c137a2", // fuchsia
+              "#f0b323", // gold
+              "#e40046", // crimson
+              "#ff8a3d", // amber
+              "#56c271"  // grass
             ]
           }
         ]
       },
       options: {
+        cutoutPercentage: 60,
+        responsive: true,
         legend: {
           position: 'right'
         }

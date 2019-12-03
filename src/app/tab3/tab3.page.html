@@ -6,17 +6,40 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-toolbar>
+<ion-toolbar class="welcome-message">
   <ion-buttons slot="secondary">
     <ion-button><ion-icon name="arrow-back"></ion-icon></ion-button>
   </ion-buttons>
+  <ion-title>
+    <p>Hey, Francine</p>
+    <img class="avatar" src="assets/francine.png" />
+  </ion-title>
 </ion-toolbar>
 
 <ion-content>
 
   <ion-card>
-    <ion-card-content>
-      1234.56
+    <ion-card-content class="account-info">
+      <ion-grid>
+        <ion-row>
+          <ion-col class="centered text">
+            <div>You have</div>
+          </ion-col>
+          <div class="vertical-line"></div>
+          <ion-col class="centered text">
+            <div>You spent</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="centered amount">
+            <div>$54.85</div>
+          </ion-col>
+          <div class="vertical-line"></div>
+          <ion-col class="centered amount">
+            <div>${{total | number:'1.2-2'}}</div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-card-content>
   </ion-card>
 
@@ -30,9 +53,15 @@
     <ion-card-content>
       <ion-list>
         <ion-list-header class="expenses-header">Expenses</ion-list-header>
-        <ion-row *ngFor="let transaction of transactions[1].transactions">
-          <ion-icon name="cart"></ion-icon>
-          <p class="transaction-font">&nbsp;{{transaction.name}}</p>
+        <ion-row *ngFor="let transaction of transactions[1].transactions" class="transaction-row">
+          <div class="category-name">
+            <ion-icon *ngIf="transaction.category === 'Food'" name="restaurant"></ion-icon>
+            <ion-icon *ngIf="transaction.category === 'Transportation'" name="bus"></ion-icon>
+            <ion-icon *ngIf="transaction.category === 'Clothing'" name="cart"></ion-icon>
+            <ion-icon *ngIf="transaction.category === 'House'" name="home"></ion-icon>
+            <p class="transaction-font">&nbsp;{{transaction.name}}</p>
+          </div>
+          <p class="transaction-font pull-right">&nbsp;${{transaction.amount}}</p>
           <ion-progress-bar color="primary" [value]="transaction.amount/100"></ion-progress-bar>
         </ion-row>
       </ion-list>
