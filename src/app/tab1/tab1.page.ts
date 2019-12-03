@@ -3,6 +3,7 @@ import { ToastController, ModalController } from '@ionic/angular';
 import { TransactionsModal } from './transactions-modal/transactions-modal';
 import { PaymentInitService } from '../shared/payment-init.service';
 import { Subject } from 'rxjs';
+import { AddKidModal } from './add-kid-modal/add-kid-modal';
 
 @Component({
   selector: 'app-tab1',
@@ -18,9 +19,8 @@ export class Tab1Page implements OnInit {
 
   ngOnInit() {
     this.wsConnect();
+    this.addChild();
   }
-
-  addChild() {}
 
   wsConnect() {
     this.paymentInitService.getPaymentsSubject().subscribe((msg) => {
@@ -34,6 +34,13 @@ export class Tab1Page implements OnInit {
       componentProps: {
         childName
       }
+    });
+    return await modal.present();
+  }
+
+  async addChild() {
+    const modal = await this.modalController.create({
+      component: AddKidModal
     });
     return await modal.present();
   }

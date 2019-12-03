@@ -1,0 +1,89 @@
+<ion-header translucent>
+    <ion-toolbar color="primary">
+        <ion-title>Add a kid</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="dismissModal()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+    <ion-card>
+        <ion-card-header class="no-bottom-padding">
+            <ion-card-subtitle>
+                Personal infos
+            </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-input placeholder="Name"></ion-input>
+            <ion-input placeholder="Phone" type="tel"></ion-input>
+            <ion-item>
+                <ion-label>Birthday</ion-label>
+                <ion-datetime value="2009-12-04" placeholder="Select Date"></ion-datetime>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+        <ion-card-header class="no-bottom-padding">
+            <ion-card-subtitle>
+                Budget
+            </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-segment>
+                <ion-segment-button value="daily" checked>
+                    <ion-label>Daily</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="weekly">
+                    <ion-label>Weekly</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="monthly">
+                    <ion-label>Monthly</ion-label>
+                </ion-segment-button>
+            </ion-segment>
+            <ion-input placeholder="10€"></ion-input>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+            <ion-card-header class="no-bottom-padding">
+                <ion-card-subtitle>
+                    Allowed categories
+                </ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+                <ion-chip color="primary">
+                    <ion-icon name="cafe"></ion-icon>
+                    <ion-label>Food</ion-label>
+                </ion-chip>
+                <ion-chip color="secondary">
+                    <ion-icon name="train"></ion-icon>
+                    <ion-label>Transportation</ion-label>
+                </ion-chip>
+                <ion-chip color="tertiary">
+                    <ion-icon name="shirt"></ion-icon>
+                    <ion-label>Clothing</ion-label>
+                </ion-chip>
+                <ion-chip color="success">
+                    <ion-icon name="home"></ion-icon>
+                    <ion-label>House</ion-label>
+                </ion-chip>
+                <ion-chip color="warning">
+                    <ion-icon name="heart"></ion-icon>
+                    <ion-label>Donation</ion-label>
+                </ion-chip>
+                <ion-chip color="danger">
+                    <ion-icon name="beer"></ion-icon>
+                    <ion-label>Bars</ion-label>
+                </ion-chip>
+            </ion-card-content>
+        </ion-card>
+
+        <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+            <ion-fab-button  disabled>
+                <ion-icon name="checkmark"></ion-icon>
+            </ion-fab-button>
+            </ion-fab>
+</ion-content>
