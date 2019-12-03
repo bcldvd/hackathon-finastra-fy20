@@ -123,6 +123,28 @@
     flex-direction: row;
     justify-content: space-between;
   }
+
+  .transaction-progress-bar {
+    &.category-house {
+      --progress-background: #5bc1d7; // ocean
+    }
+
+    &.category-food {
+      --progress-background:#d2d755; // lime
+    }
+  
+    &.category-clothing {
+      --progress-background:#694ed6; // violet
+    }
+  
+    &.category-transportation {
+      --progress-background:#c137a2; // fuchsia
+    }
+  
+    &.category-donation {
+      --progress-background:#f0b323; // gold
+    }
+  }
 }
 
 .date-select-container {
