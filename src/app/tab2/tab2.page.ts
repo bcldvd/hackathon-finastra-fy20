@@ -104,7 +104,7 @@ export class Tab2Page implements OnInit {
     await modal.present();
 
     const { data } = await modal.onWillDismiss();
-    if (data.nextCustomer) {
+    if (data && data.nextCustomer) {
       this.clearCart();
     }
   }
