@@ -22,6 +22,7 @@ export class Tab3Page implements OnInit {
   transactions: TransactionByDate[];
   labels: any[] = [];
   date: string = 'Dec 2019';
+  balance: number = 54.85;
 
   constructor(
     private barcodeScanner: BarcodeScanner,
@@ -56,6 +57,9 @@ export class Tab3Page implements OnInit {
       iban,
       amount
     }).subscribe(data => {
+      this.total += amount;
+      this.balance -= amount;
+
       this.displayConfirmationToast();
     });
   }
