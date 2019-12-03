@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 import { PaymentInitService } from 'src/app/shared/payment-init.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'checkout-modal',
@@ -9,6 +10,7 @@ import { PaymentInitService } from 'src/app/shared/payment-init.service';
 export class CheckoutModal implements OnInit {
   @Input() amountToPay: number;
 
+  payment$: Subject<any>;
   qrCodeData: string;
   paymentDone: boolean;
 
@@ -23,7 +25,7 @@ export class CheckoutModal implements OnInit {
   }
 
   wsConnect() {
-    this.paymentInitService.getPaymentsSubject().subscribe((msg) => {
+    this.payment$ = this.paymentInitService.getPaymentsSubject().subscribe((msg) => {
       this.paymentDone = true;
     });
   }
@@ -36,5 +38,9 @@ export class CheckoutModal implements OnInit {
     this.modalController.dismiss({
       nextCustomer: true
     });
+  }
+
+  ionViewDidLeave() {
+    this.payment$.unsubscribe();
   }
 }

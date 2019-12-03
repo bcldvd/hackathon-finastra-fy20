@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ToastController } from '@ionic/angular';
-import { Chart } from "chart.js";
+import { Chart } from 'chart.js';
 import { NO_CORDOVA, CATEGORY_IONIC_ICON_MAPPER } from '../shared/data';
 import { PaymentInitService } from '../shared/payment-init.service';
 import { MOCK_TRANSACTIONS, TransactionByDate } from '../shared/data';
@@ -21,8 +21,8 @@ export class Tab3Page implements OnInit {
   total: number;
   transactions: TransactionByDate[];
   labels: any[] = [];
-  date: string = 'Dec 2019';
-  balance: number = 54.85;
+  date = 'Dec 2019';
+  balance = 54.85;
 
   constructor(
     private barcodeScanner: BarcodeScanner,
@@ -40,7 +40,7 @@ export class Tab3Page implements OnInit {
     this.barcodeScanner
       .scan()
       .then(barcodeData => {
-        this.requestForPayment(barcodeData);
+        this.requestForPayment(parseFloat(barcodeData.text));
       })
       .catch(err => {
         if (err === NO_CORDOVA) {
@@ -67,7 +67,6 @@ export class Tab3Page implements OnInit {
   async displayConfirmationToast() {
     const toast = await this.toastController.create({
       message: 'Payment done',
-      // message: 'Click to Close',
       showCloseButton: true,
       duration: 5000,
       color: 'primary',
@@ -104,7 +103,7 @@ export class Tab3Page implements OnInit {
         acc[item.category] = item.amount;
       }
       return acc;
-    }, {})
+    }, {});
 
     const values = Object.keys(data).map(category => data[category]);
     values.forEach(val => this.total += val);
@@ -113,12 +112,12 @@ export class Tab3Page implements OnInit {
       label: category,
       pct: ((data[category] / this.total) * 100).toFixed(2),
       amount: data[category]
-    }))
+    }));
 
     this.labels.sort((a, b) => b.pct - a.pct);
     values.sort((a, b) => b - a);
 
-    let colors = [];
+    const colors = [];
     this.labels.forEach(item => {
       switch (item.label) {
         case 'House': {
@@ -150,7 +149,7 @@ export class Tab3Page implements OnInit {
         labels: this.labels.map(item => `${item.label} ${item.pct}%`),
         datasets: [
           {
-            label: "Expenses",
+            label: 'Expenses',
             data: values,
             backgroundColor: colors
           }

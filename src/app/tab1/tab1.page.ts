@@ -11,6 +11,8 @@ import { AddKidModal } from './add-kid-modal/add-kid-modal';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page implements OnInit {
+  payment$: Subject<any>;
+
   constructor(
     public toastController: ToastController,
     public modalController: ModalController,
@@ -22,7 +24,7 @@ export class Tab1Page implements OnInit {
   }
 
   wsConnect() {
-    this.paymentInitService.getPaymentsSubject().subscribe((msg) => {
+    this.payment$ = this.paymentInitService.getPaymentsSubject().subscribe((msg) => {
       this.presentNewPaymentToast('Francine');
     });
   }
@@ -64,5 +66,9 @@ export class Tab1Page implements OnInit {
   private simulatePaymentReceived() {
     const childName = 'Francine';
     this.presentNewPaymentToast(childName);
+  }
+
+  ionViewDidLeave() {
+    this.payment$.unsubscribe();
   }
 }
