@@ -7,17 +7,16 @@
 </ion-header>
 
 <ion-toolbar class="welcome-message">
-  <ion-buttons slot="secondary">
+  <!--<ion-buttons slot="secondary">
     <ion-button><ion-icon name="arrow-back"></ion-icon></ion-button>
-  </ion-buttons>
+  </ion-buttons>-->
   <ion-title>
-    <p>Hey, Francine</p>
+    <h4>Hey, Francine</h4>
     <img class="avatar" src="assets/francine.png" />
   </ion-title>
 </ion-toolbar>
 
 <ion-content>
-
   <ion-card>
     <ion-card-content class="account-info">
       <ion-grid>
@@ -54,15 +53,14 @@
       <ion-list>
         <ion-list-header class="expenses-header">Expenses</ion-list-header>
         <ion-row *ngFor="let transaction of transactions[1].transactions" class="transaction-row">
-          <div class="category-name">
-            <ion-icon *ngIf="transaction.category === 'Food'" name="restaurant"></ion-icon>
-            <ion-icon *ngIf="transaction.category === 'Transportation'" name="bus"></ion-icon>
-            <ion-icon *ngIf="transaction.category === 'Clothing'" name="cart"></ion-icon>
-            <ion-icon *ngIf="transaction.category === 'House'" name="home"></ion-icon>
+          <ion-col size="1" class="category-avatar" ngClass="category-{{transaction.category | lowercase}}">
+            <ion-icon [name]="mapCategoryToIonicIconName(transaction.category)"></ion-icon>
+          </ion-col>
+          <ion-col>
             <p class="transaction-font">&nbsp;{{transaction.name}}</p>
-          </div>
-          <p class="transaction-font pull-right">&nbsp;${{transaction.amount}}</p>
-          <ion-progress-bar color="primary" [value]="transaction.amount/100"></ion-progress-bar>
+            <p class="transaction-font pull-right">&nbsp;${{transaction.amount}}</p>
+            <ion-progress-bar color="primary" [value]="transaction.amount/100"></ion-progress-bar>
+          </ion-col>
         </ion-row>
       </ion-list>
     </ion-card-content>

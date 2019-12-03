@@ -1,10 +1,17 @@
 export const NO_CORDOVA = 'cordova_not_available';
 
+export const CATEGORY_IONIC_ICON_MAPPER = {
+  Food: 'cafe',
+  Transportation: 'train',
+  Clothing: 'shirt',
+  House: 'home',
+  Donation: 'heart'
+};
+
 export interface TransactionByDate {
   date: string;
   transactions: Transaction[];
 }
-
 export interface Transaction {
   name: string;
   amount: number;

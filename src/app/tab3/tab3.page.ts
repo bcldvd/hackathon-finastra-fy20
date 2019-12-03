@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ToastController } from '@ionic/angular';
 import { Chart } from "chart.js";
-import { NO_CORDOVA } from '../shared/data';
+import { NO_CORDOVA, CATEGORY_IONIC_ICON_MAPPER } from '../shared/data';
 import { PaymentInitService } from '../shared/payment-init.service';
 import { MOCK_TRANSACTIONS, TransactionByDate } from '../shared/data';
 
@@ -129,5 +129,9 @@ export class Tab3Page implements OnInit {
       position: 'bottom'
     });
     toast.present();
+  }
+
+  mapCategoryToIonicIconName(category: string): string {
+    return CATEGORY_IONIC_ICON_MAPPER[category];
   }
 }
