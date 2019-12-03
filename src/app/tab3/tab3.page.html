@@ -76,7 +76,7 @@
               <p class="transaction-font">{{transaction.label}}&nbsp;&nbsp;{{transaction.pct}}%</p>
               <p class="transaction-font">${{transaction.amount | number:'1.2-2' }}</p>
             </div>
-            <ion-progress-bar color="primary" [value]="transaction.amount/100"></ion-progress-bar>
+            <ion-progress-bar class="transaction-progress-bar" ngClass="category-{{transaction.label | lowercase}}" [value]="transaction.amount/100"></ion-progress-bar>
           </ion-col>
         </ion-row>
       </ion-list>
