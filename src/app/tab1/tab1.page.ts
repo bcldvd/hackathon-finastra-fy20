@@ -9,10 +9,7 @@ import { Subject } from 'rxjs';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page implements OnInit, OnDestroy {
-  paymentReceived$: Subject<any>;
-  ws: WebSocket;
-
+export class Tab1Page implements OnInit {
   constructor(
     public toastController: ToastController,
     public modalController: ModalController,
@@ -23,22 +20,12 @@ export class Tab1Page implements OnInit, OnDestroy {
     this.wsConnect();
   }
 
-  ngOnDestroy() {
-    this.ws.close();
-  }
-
   addChild() {}
 
   wsConnect() {
-    this.ws = new WebSocket(this.paymentInitService.getWsUri());
-    this.ws.onmessage = (msg) => {
+    this.paymentInitService.getPaymentsSubject().subscribe((msg) => {
       this.presentNewPaymentToast('Francine');
-    }
-
-    this.ws.onopen = () => {
-    }
-    this.ws.onclose = () => {
-    }
+    });
   }
 
   async displayTransactions(childName: string) {

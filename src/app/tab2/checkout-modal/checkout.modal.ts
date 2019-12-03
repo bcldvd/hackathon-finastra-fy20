@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
+import { PaymentInitService } from 'src/app/shared/payment-init.service';
 
 @Component({
   selector: 'checkout-modal',
@@ -11,10 +12,20 @@ export class CheckoutModal implements OnInit {
   qrCodeData: string;
   paymentDone: boolean;
 
-  constructor(public modalController: ModalController) {}
+  constructor(
+    public modalController: ModalController,
+    public paymentInitService: PaymentInitService,
+  ) {}
 
   ngOnInit() {
     this.qrCodeData = this.amountToPay.toString();
+    this.wsConnect();
+  }
+
+  wsConnect() {
+    this.paymentInitService.getPaymentsSubject().subscribe((msg) => {
+      this.paymentDone = true;
+    });
   }
 
   dismissModal() {
