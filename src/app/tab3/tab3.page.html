@@ -16,6 +16,15 @@
 </ion-toolbar>
 
 <ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>Date</ion-label>
+      <ion-select [(ngModel)]="date" (ngModelChange)="refreshData()">
+        <ion-select-option *ngFor="let transaction of transactions">{{transaction.date}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
   <ion-card>
     <ion-card-content class="account-info">
       <ion-grid>

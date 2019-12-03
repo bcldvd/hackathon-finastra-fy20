@@ -18,9 +18,10 @@ export class Tab3Page implements OnInit {
 
   private doughnutChart: Chart;
 
-  total: number = 0;
+  total: number;
   transactions: TransactionByDate[];
   labels: any[] = [];
+  date: string = 'Today';
 
   constructor(
     private barcodeScanner: BarcodeScanner,
@@ -31,56 +32,7 @@ export class Tab3Page implements OnInit {
   ngOnInit() {
     this.transactions = MOCK_TRANSACTIONS;
 
-    const data = this.transactions[1].transactions.reduce((acc, item) => {
-      if (acc[item.category]) {
-        acc[item.category] += item.amount;
-      } else {
-        acc[item.category] = item.amount;
-      }
-      return acc;
-    }, {})
-
-    const values = Object.keys(data).map(category => data[category]);
-    values.forEach(val => this.total += val);
-
-    Object.keys(data).forEach(category => this.labels.push({
-      label: category,
-      pct: ((data[category] / this.total) * 100).toFixed(2),
-      amount: data[category]
-    }))
-
-    this.labels.sort((a, b) => b.pct - a.pct);
-    values.sort((a, b) => b - a);
-
-    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
-      type: 'doughnut',
-      data: {
-        labels: this.labels.map(item => `${item.label} ${item.pct}%`),
-        datasets: [
-          {
-            label: "Expenses",
-            data: values,
-            backgroundColor: [
-              "#5bc1d7", // ocean
-              "#d2d755", // lime
-              "#694ed6", // violet
-              "#c137a2", // fuchsia
-              "#f0b323", // gold
-              "#e40046", // crimson
-              "#ff8a3d", // amber
-              "#56c271"  // grass
-            ]
-          }
-        ]
-      },
-      options: {
-        cutoutPercentage: 60,
-        responsive: true,
-        legend: {
-          position: 'right'
-        }
-      }
-    });
+    this.refreshData();
   }
 
   scanCode() {
@@ -134,5 +86,79 @@ export class Tab3Page implements OnInit {
 
   mapCategoryToIonicIconName(category: string): string {
     return CATEGORY_IONIC_ICON_MAPPER[category];
+  }
+
+  refreshData() {
+    this.labels.length = 0;
+    this.total = 0;
+
+    const trans = this.transactions.find(t => t.date === this.date);
+    const data = trans.transactions.reduce((acc, item) => {
+      if (acc[item.category]) {
+        acc[item.category] += item.amount;
+      } else {
+        acc[item.category] = item.amount;
+      }
+      return acc;
+    }, {})
+
+    const values = Object.keys(data).map(category => data[category]);
+    values.forEach(val => this.total += val);
+
+    Object.keys(data).forEach(category => this.labels.push({
+      label: category,
+      pct: ((data[category] / this.total) * 100).toFixed(2),
+      amount: data[category]
+    }))
+
+    this.labels.sort((a, b) => b.pct - a.pct);
+    values.sort((a, b) => b - a);
+
+    let colors = [];
+    this.labels.forEach(item => {
+      switch (item.label) {
+        case 'House': {
+          colors.push('#5bc1d7');
+          break;
+        }
+        case 'Food': {
+          colors.push('#d2d755');
+          break;
+        }
+        case 'Clothing': {
+          colors.push('#694ed6');
+          break;
+        }
+        case 'Transportation': {
+          colors.push('#c137a2');
+          break;
+        }
+        case 'Donation': {
+          colors.push('#f0b323');
+          break;
+        }
+      }
+    });
+
+    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
+      type: 'doughnut',
+      data: {
+        labels: this.labels.map(item => `${item.label} ${item.pct}%`),
+        datasets: [
+          {
+            label: "Expenses",
+            data: values,
+            backgroundColor: colors
+          }
+        ]
+      },
+      options: {
+        cutoutPercentage: 60,
+        responsive: true,
+        legend: {
+          position: 'right'
+        }
+      }
+    });
   }
 }
