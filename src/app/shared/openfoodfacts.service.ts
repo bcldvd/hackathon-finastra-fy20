@@ -38,5 +38,6 @@ export interface OpenFoodFactsRes {
 export interface Product {
   image_thumb_url: string;
   product_name_fr: string;
+  code: string;
   [key: string]: any;
 }

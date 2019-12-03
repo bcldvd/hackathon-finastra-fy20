@@ -51,7 +51,8 @@ export class Tab2Page implements OnInit {
         } else {
           this.openFoodFactsService.getInfoFromBarCode(barcodeData.text).subscribe(data => {
             const item = this.createItemFromOpenFoodFactsData(data);
-            this.items.push(item);
+            this.addtoItems(item);
+            this.updateTotal();
           }, (err) => {
             this.displayErrorToast(err);
           });
@@ -72,13 +73,23 @@ export class Tab2Page implements OnInit {
       name: data.product_name_fr,
       image: data.image_thumb_url,
       quantity: 1,
+      code: data.code,
       price: 1
     };
   }
 
+  private addtoItems(newItem: Item) {
+    const itemFound = this.items.findIndex(item => item.code === newItem.code);
+    if (itemFound > -1) {
+      this.items[itemFound].quantity++;
+    } else {
+      this.items.push(newItem);
+    }
+  }
+
   updateTotal() {
-    this.totalPrice = this.items.reduce((prev, next) => {
-      return (prev += next.price);
+    this.totalPrice = this.items.reduce((prev, next: Item) => {
+      return (prev += (next.price * next.quantity));
     }, 0);
   }
 
@@ -110,4 +121,5 @@ export interface Item {
   price: number;
   quantity: number;
   image: string;
+  code?: string;
 }
