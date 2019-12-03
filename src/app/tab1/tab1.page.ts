@@ -25,15 +25,16 @@ export class Tab1Page implements OnInit {
 
   wsConnect() {
     this.payment$ = this.paymentInitService.getPaymentsSubject().subscribe((msg) => {
-      this.presentNewPaymentToast('Francine');
+      this.presentNewPaymentToast('Francine', msg);
     });
   }
 
-  async displayTransactions(childName: string) {
+  async displayTransactions(childName: string, newTransactionAmount: number) {
     const modal = await this.modalController.create({
       component: TransactionsModal,
       componentProps: {
-        childName
+        childName,
+        newTransactionAmount
       }
     });
     return await modal.present();
@@ -46,7 +47,7 @@ export class Tab1Page implements OnInit {
     return await modal.present();
   }
 
-  async presentNewPaymentToast(childName: string) {
+  async presentNewPaymentToast(childName: string, newTransactionAmount: number) {
     const toast = await this.toastController.create({
       header: 'New payment from Francine',
       message: 'Click to Close',
@@ -55,7 +56,7 @@ export class Tab1Page implements OnInit {
         {
           text: 'See',
           handler: () => {
-            this.displayTransactions(childName);
+            this.displayTransactions(childName, newTransactionAmount);
           }
         }
       ]
@@ -65,7 +66,8 @@ export class Tab1Page implements OnInit {
 
   private simulatePaymentReceived() {
     const childName = 'Francine';
-    this.presentNewPaymentToast(childName);
+    const newTransactionAmount = 4;
+    this.presentNewPaymentToast(childName, newTransactionAmount);
   }
 
   ionViewDidLeave() {

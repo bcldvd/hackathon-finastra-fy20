@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { MOCK_TRANSACTIONS, TransactionByDate, CATEGORY_IONIC_ICON_MAPPER } from '../../shared/data';
+import { MOCK_TRANSACTIONS, TransactionByDate, CATEGORY_IONIC_ICON_MAPPER, Transaction } from '../../shared/data';
 
 @Component({
   selector: 'transactions-modal',
@@ -9,6 +9,7 @@ import { MOCK_TRANSACTIONS, TransactionByDate, CATEGORY_IONIC_ICON_MAPPER } from
 })
 export class TransactionsModal implements OnInit {
   @Input() childName: string;
+  @Input() newTransactionAmount: number;
 
   transactions: TransactionByDate[];
 
@@ -16,6 +17,9 @@ export class TransactionsModal implements OnInit {
 
   ngOnInit() {
     this.simulateTransactions();
+    if (this.newTransactionAmount) {
+      this.addNewTransaction(this.newTransactionAmount);
+    }
   }
 
   dismissModal() {
@@ -28,5 +32,15 @@ export class TransactionsModal implements OnInit {
 
   private simulateTransactions() {
     this.transactions = MOCK_TRANSACTIONS;
+  }
+
+  private addNewTransaction(amount: number) {
+    const newTransaction: Transaction = {
+      name: `Finastra's Hackathon`,
+      category: 'Food',
+      amount,
+      new: true
+    };
+    this.transactions[0].transactions.unshift(newTransaction);
   }
 }

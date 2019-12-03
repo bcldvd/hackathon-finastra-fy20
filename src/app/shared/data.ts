@@ -27,6 +27,7 @@ export interface Transaction {
   name: string;
   amount: number;
   category: string;
+  new?: boolean;
 }
 
 export const MOCK_TRANSACTIONS: TransactionByDate[] = [
@@ -34,8 +35,8 @@ export const MOCK_TRANSACTIONS: TransactionByDate[] = [
     date: 'Dec 2019',
     transactions: [
       {
-        name: `Finastra's Hackathon`,
-        category: 'Food',
+        name: `Uniqlo`,
+        category: 'Clothing',
         amount: 5.73
       },
       {

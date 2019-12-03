@@ -24,7 +24,10 @@
                             <span>{{transaction.name}}</span>
                             <p>{{transaction.category}}</p>
                         </span>
-                        <h2>{{transaction.amount | currency}}</h2>
+                        <h2>
+                            <ion-badge color="danger" *ngIf="transaction.new">new</ion-badge>
+                            {{transaction.amount | currency}}
+                        </h2>
                     </div>
                 </ion-label>
             </ion-item>
