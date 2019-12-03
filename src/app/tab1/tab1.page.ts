@@ -29,7 +29,7 @@ export class Tab1Page implements OnInit {
     });
   }
 
-  async displayTransactions(childName: string, newTransactionAmount: number) {
+  async displayTransactions(childName: string, newTransactionAmount?: number) {
     const modal = await this.modalController.create({
       component: TransactionsModal,
       componentProps: {
