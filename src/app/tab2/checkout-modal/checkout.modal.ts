@@ -7,7 +7,9 @@ import { NavParams, ModalController } from '@ionic/angular';
 })
 export class CheckoutModal implements OnInit {
   @Input() amountToPay: number;
+
   qrCodeData: string;
+  paymentDone: boolean;
 
   constructor(public modalController: ModalController) {}
 
@@ -17,5 +19,11 @@ export class CheckoutModal implements OnInit {
 
   dismissModal() {
     this.modalController.dismiss();
+  }
+
+  nextCustomer() {
+    this.modalController.dismiss({
+      nextCustomer: true
+    });
   }
 }

@@ -6,10 +6,42 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-toolbar>
+  <ion-buttons slot="secondary">
+    <ion-button><ion-icon name="arrow-back"></ion-icon></ion-button>
+  </ion-buttons>
+</ion-toolbar>
+
 <ion-content>
-    <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-      <ion-fab-button color="primary" (click)="scanCode()">
-        <ion-icon name="cart"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
+
+  <ion-card>
+    <ion-card-content>
+      1234.56
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <canvas #doughnutCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <ion-list-header class="expenses-header">Expenses</ion-list-header>
+        <ion-row *ngFor="let transaction of transactions[1].transactions">
+          <ion-icon name="cart"></ion-icon>
+          <p class="transaction-font">&nbsp;{{transaction.name}}</p>
+          <ion-progress-bar color="primary" [value]="transaction.amount/100"></ion-progress-bar>
+        </ion-row>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="primary" (click)="scanCode()">
+      <ion-icon name="cart"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

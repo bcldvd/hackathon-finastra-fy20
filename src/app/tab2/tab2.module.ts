@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Tab2Page } from './tab2.page';
 import { CheckoutModal } from './checkout-modal/checkout.modal';
 import { QRCodeModule } from 'angularx-qrcode';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { QRCodeModule } from 'angularx-qrcode';
     CommonModule,
     FormsModule,
     RouterModule.forChild([{ path: '', component: Tab2Page }]),
-    QRCodeModule
+    QRCodeModule,
+    SharedModule
   ],
   declarations: [Tab2Page, CheckoutModal],
   entryComponents: [CheckoutModal]

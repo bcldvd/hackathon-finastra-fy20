@@ -9,7 +9,7 @@
     </ion-toolbar>
 </ion-header>
 <ion-content fullscreen>
-    <ion-card>
+    <ion-card *ngIf="!paymentDone">
         <ion-card-header>
             <ion-card-title>Total to pay : {{amountToPay | currency:'EUR'}}</ion-card-title>
             <ion-card-subtitle>Scan code below</ion-card-subtitle>
@@ -17,6 +17,18 @@
 
         <ion-card-content>
             <qrcode [qrdata]="qrCodeData" [size]="256" [level]="'M'"></qrcode>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="paymentDone">
+        <ion-card-header>
+            <ion-card-title>Payment done</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+            <valid-checkbox></valid-checkbox>
+
+            <ion-button expand="block" (click)="nextCustomer()">Next customer</ion-button>
         </ion-card-content>
     </ion-card>
 </ion-content>

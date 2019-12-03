@@ -69,7 +69,7 @@ export class Tab1Page implements OnInit, OnDestroy {
   }
 
   private simulatePaymentReceived() {
-    const childName = 'Francine'
+    const childName = 'Francine';
     this.presentNewPaymentToast(childName);
   }
 }

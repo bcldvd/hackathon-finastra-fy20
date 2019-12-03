@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { CheckoutModal } from './checkout-modal/checkout.modal';
 import { NO_CORDOVA } from '../shared/data';
+import { OpenFoodFactsService, Product } from '../shared/openfoodfacts.service';
 
 const MOCK_ITEMS = [
   {
@@ -28,21 +29,34 @@ const MOCK_ITEMS = [
 })
 export class Tab2Page implements OnInit {
   data: string;
-  items: Item[];
+  items: Item[] = [];
   totalPrice: number;
 
   constructor(
     private barcodeScanner: BarcodeScanner,
-    public modalController: ModalController
+    public modalController: ModalController,
+    public openFoodFactsService: OpenFoodFactsService,
+    public toastController: ToastController,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   scanCode() {
     this.barcodeScanner
       .scan()
       .then(barcodeData => {
-        this.data = `Barcode data ${JSON.stringify(barcodeData)}`;
+        if (barcodeData.cancelled) {
+          this.displayErrorToast('Product not found in database');
+        } else {
+          this.openFoodFactsService.getInfoFromBarCode(barcodeData.text).subscribe(data => {
+            const item = this.createItemFromOpenFoodFactsData(data);
+            this.addtoItems(item);
+            this.updateTotal();
+          }, (err) => {
+            this.displayErrorToast(err);
+          });
+        }
       })
       .catch(err => {
         if (err === NO_CORDOVA) {
@@ -54,9 +68,28 @@ export class Tab2Page implements OnInit {
       });
   }
 
+  private createItemFromOpenFoodFactsData(data: Product): Item {
+    return {
+      name: data.product_name_fr,
+      image: data.image_thumb_url,
+      quantity: 1,
+      code: data.code,
+      price: 1
+    };
+  }
+
+  private addtoItems(newItem: Item) {
+    const itemFound = this.items.findIndex(item => item.code === newItem.code);
+    if (itemFound > -1) {
+      this.items[itemFound].quantity++;
+    } else {
+      this.items.push(newItem);
+    }
+  }
+
   updateTotal() {
-    this.totalPrice = this.items.reduce((prev, next) => {
-      return (prev += next.price);
+    this.totalPrice = this.items.reduce((prev, next: Item) => {
+      return (prev += (next.price * next.quantity));
     }, 0);
   }
 
@@ -67,7 +100,29 @@ export class Tab2Page implements OnInit {
         amountToPay: this.totalPrice
       }
     });
-    return await modal.present();
+
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+    if (data.nextCustomer) {
+      this.clearCart();
+    }
+  }
+
+  private clearCart() {
+    this.items = [];
+  }
+
+  async displayErrorToast(err) {
+    const toast = await this.toastController.create({
+      header: 'Error',
+      message: err.toString().replace('Error: ', ''),
+      showCloseButton: true,
+      duration: 3000,
+      color: 'danger',
+      position: 'bottom'
+    });
+    toast.present();
   }
 }
 
@@ -76,4 +131,5 @@ export interface Item {
   price: number;
   quantity: number;
   image: string;
+  code?: string;
 }
