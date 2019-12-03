@@ -1,14 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { MOCK_TRANSACTIONS, TransactionByDate } from '../../shared/data';
-
-const CATEGORY_IONIC_ICON_MAPPER = {
-  Food: 'cafe',
-  Transportation: 'train',
-  Clothing: 'shirt',
-  House: 'house',
-  Donation: 'heart'
-};
+import { MOCK_TRANSACTIONS, TransactionByDate, CATEGORY_IONIC_ICON_MAPPER } from '../../shared/data';
 
 @Component({
   selector: 'transactions-modal',

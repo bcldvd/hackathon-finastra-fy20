@@ -1,44 +1,44 @@
 ion-avatar {
-    padding: 8px;
+  padding: 8px;
 
-    &.category-food {
-        background: #F0B323;
-    }
+  &.category-house {
+    background: #5bc1d7; // ocean
+  }
 
-    &.category-transportation {
-        background: #56C271;
-    }
+  &.category-food {
+    background: #d2d755; // lime
+  }
 
-    &.category-clothing {
-        background: #C137A2;
-    }
+  &.category-clothing {
+    background: #694ed6; // violet
+  }
 
-    &.category-house {
-        background: #C137A2;
-    }
+  &.category-transportation {
+    background: #c137a2; // fuchsia
+  }
 
-    &.category-donation {
-        background: #C137A2;
-    }
+  &.category-donation {
+    background: #f0b323; // gold
+  }
 
-    ion-icon {
-        color: white;
-        height: 100%;
-        width: 100%;
-    }
+  ion-icon {
+    color: white;
+    height: 100%;
+    width: 100%;
+  }
 }
 
 ::ng-deep ion-label div{
-    display: flex !important;
-    justify-content: space-between;
+  display: flex !important;
+  justify-content: space-between;
 
-    span {
-        display: flex;
-        flex-direction: column;
+  span {
+    display: flex;
+    flex-direction: column;
 
-        p {
-            text-transform: capitalize;
-            color: #707070;
-        }
+    p {
+      text-transform: capitalize;
+      color: #707070;
     }
+  }
 }

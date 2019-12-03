@@ -2,12 +2,117 @@
   font-size: 12px;
 }
 
-ion-row {
+.account-info {
+  padding: 8px;
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &.text {
+    font-size: 14px;
+    align-items: flex-end;
+  }
+  &.amount {
+    font-weight: bold;
+    font-family: Futura;
+    font-size: 28px;
+  }
+  &.accent {
+    color: #c137a2;
+  }
+  &.small {
+    font-size: 20px;
+  }
+}
+
+.transaction-row {
   height: 46px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
 }
 
 .expenses-header {
   padding: 0;
   opacity: 0.6;
   margin-bottom: 10px;
+}
+
+.category-name {
+  display: flex;
+}
+
+.vertical-line {
+  width: 1px;
+  height: 50px;
+  background :lightgray;
+  position: relative;
+  margin: 0 16px;
+}
+
+.welcome-message {
+  --min-height: 90px;
+  .avatar-holder {
+    border: 1px solid lightgray;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .avatar {
+    width: 22px;
+  }
+  h3 {
+    font-family: Roboto;
+  }
+}
+
+.category-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  padding: 2px;
+  margin-top: 8px;
+  margin-right: 8px;
+
+  &.category-house {
+    background: #5bc1d7; // ocean
+  }
+
+  &.category-food {
+    background: #d2d755; // lime
+  }
+
+  &.category-clothing {
+    background: #694ed6; // violet
+  }
+
+  &.category-transportation {
+    background: #c137a2; // fuchsia
+  }
+
+  &.category-donation {
+    background: #f0b323; // gold
+  }
+
+  ion-icon {
+    color: white;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.transaction-info {
+  display: flex;
+  flex-direction: column;
+  .transaction-amounts {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
