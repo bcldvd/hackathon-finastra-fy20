@@ -27,7 +27,7 @@
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^4.7.1",
     "angularx-qrcode": "^1.7.0-beta.5",
-    "cordova-ios": "^5.1.0",
+    "cordova-ios": "^5.1.1",
     "core-js": "^2.5.4",
     "phonegap-plugin-barcodescanner": "^8.1.0",
     "qrcode-generator-ts": "0.0.4",
