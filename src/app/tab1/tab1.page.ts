@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ToastController, ModalController } from '@ionic/angular';
 import { TransactionsModal } from './transactions-modal/transactions-modal';
 import { PaymentInitService } from '../shared/payment-init.service';
 import { Subject } from 'rxjs';
-import { delay, repeatWhen, filter, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tab1',
@@ -11,8 +10,6 @@ import { delay, repeatWhen, filter, take } from 'rxjs/operators';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page implements OnInit {
-  paymentReceived$: Subject<any>;
-
   constructor(
     public toastController: ToastController,
     public modalController: ModalController,
@@ -20,24 +17,15 @@ export class Tab1Page implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.simulatePaymentReceived()
-    this.longPollPaymentsReceived(1000).subscribe(data => {
-      this.presentNewPaymentToast('francine');
-    });
+    this.wsConnect();
   }
 
   addChild() {}
 
-  longPollPaymentsReceived(delayMs: number) {
-    return this.paymentInitService.getPaymentsStatuses().pipe(
-      repeatWhen(obs => obs.pipe(delay(delayMs))),
-      filter(data => this.checkPaymentsStatuses(data)),
-      take(1)
-    );
-  }
-
-  private checkPaymentsStatuses(data): boolean {
-    return data.payments[0].status === 'VALID';
+  wsConnect() {
+    this.paymentInitService.getPaymentsSubject().subscribe((msg) => {
+      this.presentNewPaymentToast('Francine');
+    });
   }
 
   async displayTransactions(childName: string) {

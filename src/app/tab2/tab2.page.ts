@@ -100,7 +100,17 @@ export class Tab2Page implements OnInit {
         amountToPay: this.totalPrice
       }
     });
-    return await modal.present();
+
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+    if (data && data.nextCustomer) {
+      this.clearCart();
+    }
+  }
+
+  private clearCart() {
+    this.items = [];
   }
 
   async displayErrorToast(err) {
