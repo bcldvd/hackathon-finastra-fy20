@@ -114,7 +114,7 @@ export class Tab3Page implements OnInit {
     Object.keys(data).forEach(category => this.labels.push({
       label: category,
       pct: ((data[category] / this.total) * 100).toFixed(2),
-      progressBarAmount: data[category]/max,
+      progressBarAmount: data[category]/this.total,
       amount: data[category]
     }));
 
@@ -150,7 +150,7 @@ export class Tab3Page implements OnInit {
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
       type: 'doughnut',
       data: {
-        labels: this.labels.map(item => `${item.label} ${item.pct}%`),
+        labels: this.labels.map(item => `${item.label}  ${item.pct}%`),
         datasets: [
           {
             label: 'Expenses',
