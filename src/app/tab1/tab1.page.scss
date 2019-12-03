@@ -1,23 +1,27 @@
 .welcome-message {
-    --min-height: 60px;
-    .avatar-holder {
-      //border: 1px solid lightgray;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .avatar {
-      width: 40px;
-    }
-    h4 {
-      display: flex;
-      font-family: Roboto, Arial, Helvetica, sans-serif;
-    }
-    p {
-      margin-left: 16px;
-    }
+  --min-height: 60px;
+  .avatar-holder {
+    //border: 1px solid lightgray;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
+  .avatar {
+    width: 40px;
+  }
+  h4 {
+    display: flex;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+  }
+  p {
+    margin-left: 16px;
+  }
+}
+
+.account-chart {
+  padding: 8px;
+}

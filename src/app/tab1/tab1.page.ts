@@ -1,9 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ToastController, ModalController } from '@ionic/angular';
-import { TransactionsModal } from './transactions-modal/transactions-modal';
-import { PaymentInitService } from '../shared/payment-init.service';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ModalController, ToastController } from '@ionic/angular';
+import { Chart } from 'chart.js';
 import { Subject } from 'rxjs';
+import { PaymentInitService } from '../shared/payment-init.service';
 import { AddKidModal } from './add-kid-modal/add-kid-modal';
+import { TransactionsModal } from './transactions-modal/transactions-modal';
+import { TransactionByDate, MOCK_TRANSACTIONS, Transaction } from '../shared/data';
 
 @Component({
   selector: 'app-tab1',
@@ -12,6 +14,11 @@ import { AddKidModal } from './add-kid-modal/add-kid-modal';
 })
 export class Tab1Page implements OnInit {
   payment$: Subject<any>;
+  transactions: TransactionByDate[];
+
+  private lineChart: Chart;
+
+  @ViewChild('lineCanvas', { static: true }) lineCanvas: ElementRef;
 
   constructor(
     public toastController: ToastController,
@@ -21,6 +28,49 @@ export class Tab1Page implements OnInit {
 
   ngOnInit() {
     this.wsConnect();
+
+    this.transactions = MOCK_TRANSACTIONS;
+
+    let data = [150, 130, 95];
+    Object.keys(this.transactions).forEach(key => {
+      let total = 0;
+      this.transactions[key].transactions.forEach((t: Transaction) => {
+        total += t.amount;
+      });
+      data.push(+total.toFixed(2));
+    })
+
+    this.lineChart = new Chart(this.lineCanvas.nativeElement, {
+      type: 'line',
+
+      data: {
+        labels: ['Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        datasets: [{
+          label: 'Francine',
+          backgroundColor: '#d9d3f5',
+          borderColor: '#694ed6',
+          fill: true,
+          data
+        }]
+      },
+      options: {
+        responsive: true,
+        title: {
+          display: true,
+          text: 'Expense history'
+        },
+        scales: {
+          yAxes: [{
+            type: 'linear',
+            ticks: {
+              userCallback: function (tick) {
+                return '$' + tick.toString();
+              }
+            },
+          }]
+        }
+      }
+    });
   }
 
   wsConnect() {
