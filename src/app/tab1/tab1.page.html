@@ -12,8 +12,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card class="welcome-card">
-    <img src="/assets/shapes.svg" alt="" />
+  <ion-card>
     <ion-card-header>
       <ion-card-title>- chart of evolution of accounts -</ion-card-title>
     </ion-card-header>
@@ -22,15 +21,21 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-list lines="none">
-    <ion-item>
-      <ion-avatar slot="start">
-        <img
-          src="https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/37867873_10156577586794764_7523842383927050240_n.jpg?_nc_cat=101&_nc_ohc=sFV_laACE1QAQny_cLIqzL7Tw5RwI3ZhivUapy4875Egh_CtZm6AjSOuw&_nc_ht=scontent-cdg2-1.xx&oh=18d6d6186a2abaeeae1dd4a62498fc54&oe=5E42BB5F">
-      </ion-avatar>
-      <ion-label>Elisa</ion-label>
-    </ion-item>
-  </ion-list>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>
+        My kids
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-list lines="none">
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="assets/francine.png">
+          </ion-avatar>
+          <ion-label>Francine</ion-label>
+        </ion-item>
+      </ion-list>
+  </ion-card>
 
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
     <ion-fab-button (click)="addChild()">
