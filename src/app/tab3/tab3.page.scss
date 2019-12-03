@@ -3,16 +3,20 @@
 }
 
 .account-info {
-  padding: 8px;
+  padding: 0 0 8px;
+  ion-row {
+    max-height: 40px;
+  }
 }
 
 .centered {
   display: flex;
   justify-content: center;
   align-items: center;
+  max-height: 40px;
   &.text {
     font-size: 14px;
-    align-items: flex-end;
+    //align-items: flex-end;
   }
   &.amount {
     font-weight: bold;
@@ -53,7 +57,7 @@
 }
 
 .welcome-message {
-  --min-height: 90px;
+  --min-height: 60px;
   .avatar-holder {
     border: 1px solid lightgray;
     border-radius: 50%;
@@ -67,8 +71,12 @@
   .avatar {
     width: 22px;
   }
-  h3 {
+  h4 {
+    display: flex;
     font-family: Roboto;
+  }
+  p {
+    margin-left: 16px;
   }
 }
 
@@ -115,4 +123,12 @@
     flex-direction: row;
     justify-content: space-between;
   }
+}
+
+.date-select-container {
+  margin-bottom: 0;
+}
+
+.date-select {
+  font-size: 14px;
 }

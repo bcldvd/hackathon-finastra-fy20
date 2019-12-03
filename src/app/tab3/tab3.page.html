@@ -1,5 +1,10 @@
 <ion-header>
   <ion-toolbar color="primary">
+    <ion-buttons slot="secondary">
+      <ion-button>
+        <ion-icon slot="icon-only" name="menu"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>
       Family Pay
     </ion-title>
@@ -8,18 +13,20 @@
 
 <ion-toolbar class="welcome-message">
   <ion-title>
-    <h4>Hey, Francine</h4>
-    <div class="avatar-holder">
-      <img class="avatar" src="assets/francine.png" />
-    </div>
+    <h4>
+      <p>Hey, Francine</p>
+      <div class="avatar-holder">
+        <img class="avatar" src="assets/francine.png" />
+      </div>
+    </h4>
   </ion-title>
 </ion-toolbar>
 
 <ion-content>
-  <ion-list>
+  <ion-list class="date-select-container">
     <ion-item>
-      <ion-label>Date</ion-label>
-      <ion-select [(ngModel)]="date" (ngModelChange)="refreshData()">
+      <ion-label class="date-select">Date</ion-label>
+      <ion-select [(ngModel)]="date" (ngModelChange)="refreshData()" class="date-select">
         <ion-select-option *ngFor="let transaction of transactions">{{transaction.date}}</ion-select-option>
       </ion-select>
     </ion-item>

@@ -31,17 +31,22 @@ export interface Transaction {
 
 export const MOCK_TRANSACTIONS: TransactionByDate[] = [
   {
-    date: 'Today',
+    date: 'Dec 2019',
     transactions: [
       {
         name: `Finastra's Hackathon`,
         category: 'Food',
-        amount: 3.73
+        amount: 5.73
+      },
+      {
+        name: `RATP`,
+        category: 'Transportation',
+        amount: 3.8
       }
     ]
   },
   {
-    date: 'Tuesday 03 December 2019',
+    date: 'Nov 2019',
     transactions: [
       {
         name: 'RATP',

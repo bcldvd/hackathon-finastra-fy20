@@ -21,7 +21,7 @@ export class Tab3Page implements OnInit {
   total: number;
   transactions: TransactionByDate[];
   labels: any[] = [];
-  date: string = 'Today';
+  date: string = 'Dec 2019';
 
   constructor(
     private barcodeScanner: BarcodeScanner,
