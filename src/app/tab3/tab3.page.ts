@@ -40,7 +40,9 @@ export class Tab3Page implements OnInit {
     this.barcodeScanner
       .scan()
       .then(barcodeData => {
-        this.requestForPayment(parseFloat(barcodeData.text));
+        if (!barcodeData.cancelled) {
+          this.requestForPayment(parseFloat(barcodeData.text));
+        }
       })
       .catch(err => {
         if (err === NO_CORDOVA) {

@@ -23,7 +23,7 @@
             <h2>{{item.name}}</h2>
             <p>
               <span>x{{item.quantity}}</span>
-              <span>{{item.price | currency:'EUR'}}</span>
+              <span>{{item.price | currency}}</span>
             </p>
           </ion-label>
         </ion-item>
@@ -34,14 +34,14 @@
       </ion-item-sliding>
 
       <ion-toolbar color="secondary" *ngIf="items?.length > 0">
-        <ion-title>Total : {{totalPrice | currency:'EUR'}}</ion-title>
+        <ion-title>Total : {{totalPrice | currency}}</ion-title>
         <ion-buttons slot="primary">
           <ion-button (click)="checkout()">Checkout</ion-button>
         </ion-buttons>
       </ion-toolbar>
 
       <ion-card-header *ngIf="!items || items.length == 0">
-        Empty
+        Empty cart
       </ion-card-header>
     </ion-list>
   </ion-card>
