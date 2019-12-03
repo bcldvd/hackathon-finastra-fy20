@@ -12,6 +12,19 @@ import { AddKidModal } from './add-kid-modal/add-kid-modal';
 })
 export class Tab1Page implements OnInit {
   payment$: Subject<any>;
+  balance = 3250;
+  kidBalanceList = [{
+    name: "Francine",
+    limit: 65,
+    balance: 35,
+    pct: 0
+  },
+  {
+    name: "Axel",
+    limit: 150,
+    balance: 140,
+    pct: 0
+  }]
 
   constructor(
     public toastController: ToastController,
@@ -21,6 +34,9 @@ export class Tab1Page implements OnInit {
 
   ngOnInit() {
     this.wsConnect();
+    for(let i =0; i< this.kidBalanceList.length; i++) {
+      this.kidBalanceList[i].pct = (1 - (this.kidBalanceList[i].balance / this.kidBalanceList[i].limit)) * 100;
+    }
   }
 
   wsConnect() {
