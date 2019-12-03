@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ToastController, ModalController } from '@ionic/angular';
 import { TransactionsModal } from './transactions-modal/transactions-modal';
 import { PaymentInitService } from '../shared/payment-init.service';
-import { interval, Observable, Subject } from 'rxjs';
-import { takeUntil, delay, map, flatMap, takeWhile, repeatWhen, filter, take } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { delay, repeatWhen, filter, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tab1',
@@ -68,7 +68,7 @@ export class Tab1Page implements OnInit {
   }
 
   private simulatePaymentReceived() {
-    const childName = 'Francine'
+    const childName = 'Francine';
     this.presentNewPaymentToast(childName);
   }
 }
