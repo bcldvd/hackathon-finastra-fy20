@@ -20,6 +20,7 @@ export class Tab3Page implements OnInit {
 
   total: number = 0;
   transactions: TransactionByDate[];
+  labels: any[] = [];
 
   constructor(
     private barcodeScanner: BarcodeScanner,
@@ -42,19 +43,19 @@ export class Tab3Page implements OnInit {
     const values = Object.keys(data).map(category => data[category]);
     values.forEach(val => this.total += val);
 
-    let labels = [];
-    Object.keys(data).forEach(category => labels.push({
+    Object.keys(data).forEach(category => this.labels.push({
       label: category,
-      pct: ((data[category] / this.total) * 100).toFixed(2)
+      pct: ((data[category] / this.total) * 100).toFixed(2),
+      amount: data[category]
     }))
 
-    labels.sort((a, b) => b.pct - a.pct);
+    this.labels.sort((a, b) => b.pct - a.pct);
     values.sort((a, b) => b - a);
 
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
       type: 'doughnut',
       data: {
-        labels: labels.map(item => `${item.label} ${item.pct}%`),
+        labels: this.labels.map(item => `${item.label} ${item.pct}%`),
         datasets: [
           {
             label: "Expenses",
