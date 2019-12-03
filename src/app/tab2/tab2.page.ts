@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ModalController } from '@ionic/angular';
 import { CheckoutModal } from './checkout-modal/checkout.modal';
+import { NO_CORDOVA } from '../shared/data';
 
-const NO_CORDOVA = 'cordova_not_available';
 const MOCK_ITEMS = [
   {
     name: 'Sandwich',
