@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { ModalController, ToastController, AlertController } from '@ionic/angular';
 import { Chart } from 'chart.js';
 import { Subject } from 'rxjs';
 import { PaymentInitService } from '../shared/payment-init.service';
@@ -22,22 +22,23 @@ export class Tab1Page implements OnInit {
 
   balance = 3250;
   kidBalanceList = [{
-    name: "Francine",
+    name: 'Francine',
     limit: 65,
     balance: 35,
     pct: 0
   },
   {
-    name: "Axel",
+    name: 'Axel',
     limit: 150,
     balance: 140,
     pct: 0
-  }]
+  }];
 
   constructor(
     public toastController: ToastController,
     public modalController: ModalController,
     private paymentInitService: PaymentInitService,
+    private alertController: AlertController,
   ) {}
 
   ngOnInit() {
@@ -45,14 +46,14 @@ export class Tab1Page implements OnInit {
 
     this.transactions = MOCK_TRANSACTIONS;
 
-    let data = [150.41, 130.25, 95.08];
+    const data = [150.41, 130.25, 95.08];
     Object.keys(this.transactions).forEach(key => {
       let total = 0;
       this.transactions[key].transactions.forEach((t: Transaction) => {
         total += t.amount;
       });
       data.push(+total.toFixed(2));
-    })
+    });
 
     this.lineChart = new Chart(this.lineCanvas.nativeElement, {
       type: 'line',
@@ -95,7 +96,12 @@ export class Tab1Page implements OnInit {
 
   wsConnect() {
     this.payment$ = this.paymentInitService.getPaymentsSubject().subscribe((msg) => {
-      this.presentNewPaymentToast('Francine', msg);
+      const kid = 'Francine';
+      if (msg.approved) {
+        this.presentNewPaymentToast(kid, msg.amount);
+      } else {
+        this.presentAlertUnusualTransaction(kid, msg.amount);
+      }
     });
   }
 
@@ -132,6 +138,40 @@ export class Tab1Page implements OnInit {
       ]
     });
     toast.present();
+  }
+
+  async presentAlertUnusualTransaction(kid: string, transaction: number) {
+    const alert = await this.alertController.create({
+      header: 'Unusual transaction request',
+      subHeader: `from ${kid}`,
+      buttons: [{
+        text: 'Agree',
+        handler: () => {
+          this.agreeToUnusualTransaction(transaction);
+        }
+      }, {
+        text: 'Disagree',
+        role: 'cancel',
+        handler: () => {
+          this.disagreeToUnusualTransaction(transaction);
+        },
+      }, {
+        text: 'More info',
+        handler: () => {
+          //
+        },
+      }]
+    });
+
+    await alert.present();
+  }
+
+  agreeToUnusualTransaction(transaction: number) {
+
+  }
+
+  disagreeToUnusualTransaction(transaction: number) {
+
   }
 
   private simulatePaymentReceived() {
