@@ -66,10 +66,6 @@ export class Tab1Page implements OnInit {
       },
       options: {
         responsive: true,
-        title: {
-          display: true,
-          text: 'Expense History'
-        },
         scales: {
           yAxes: [{
             type: 'linear',
