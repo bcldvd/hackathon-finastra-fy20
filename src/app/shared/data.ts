@@ -32,21 +32,6 @@ export interface Transaction {
 
 export const MOCK_TRANSACTIONS: TransactionByDate[] = [
   {
-    date: 'Dec 2019',
-    transactions: [
-      {
-        name: `Uniqlo`,
-        category: 'Clothing',
-        amount: 5.73
-      },
-      {
-        name: `RATP`,
-        category: 'Transportation',
-        amount: 3.8
-      }
-    ]
-  },
-  {
     date: 'Nov 2019',
     transactions: [
       {
@@ -88,6 +73,21 @@ export const MOCK_TRANSACTIONS: TransactionByDate[] = [
         name: 'WWF',
         category: 'Donation',
         amount: 6.50
+      }
+    ]
+  },
+  {
+    date: 'Dec 2019',
+    transactions: [
+      {
+        name: `Uniqlo`,
+        category: 'Clothing',
+        amount: 5.73
+      },
+      {
+        name: `RATP`,
+        category: 'Transportation',
+        amount: 3.8
       }
     ]
   }

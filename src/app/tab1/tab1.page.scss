@@ -1,23 +1,73 @@
 .welcome-message {
-    --min-height: 60px;
-    .avatar-holder {
-      //border: 1px solid lightgray;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .avatar {
-      width: 40px;
-    }
-    h4 {
-      display: flex;
-      font-family: Roboto, Arial, Helvetica, sans-serif;
-    }
-    p {
-      margin-left: 16px;
-    }
+  --min-height: 60px;
+  .avatar-holder {
+    //border: 1px solid lightgray;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
+  .avatar {
+    width: 40px;
+  }
+  h4 {
+    display: flex;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+  }
+  p {
+    margin-left: 16px;
+  }
+}
+
+.account-info {
+  padding: 0 0 8px;
+  ion-row {
+    max-height: 40px;
+  }
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 40px;
+  &.text {
+    font-size: 14px;
+    //align-items: flex-end;
+  }
+  &.amount {
+    font-weight: bold;
+    font-family: Futura;
+    font-size: 28px;
+  }
+  &.accent {
+    color: #c137a2;
+  }
+  &.small {
+    font-size: 20px;
+  }
+}
+
+.kid-info {
+  display: flex;
+  flex-direction: column;
+  .kid-amounts {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.kid-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  padding: 3px;
+}
+
+.account-chart {
+  padding: 8px;
+}

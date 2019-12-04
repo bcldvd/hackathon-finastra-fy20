@@ -6,8 +6,6 @@ import { NO_CORDOVA, CATEGORY_IONIC_ICON_MAPPER } from '../shared/data';
 import { PaymentInitService } from '../shared/payment-init.service';
 import { MOCK_TRANSACTIONS, TransactionByDate } from '../shared/data';
 
-Chart.defaults.global.legend.labels.usePointStyle = true;
-
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
@@ -29,7 +27,9 @@ export class Tab3Page implements OnInit {
     private paymentInitService: PaymentInitService,
     public toastController: ToastController,
     public alertController: AlertController
-  ) {}
+  ) {
+    Chart.defaults.global.legend.labels.usePointStyle = true;
+  }
 
   ngOnInit() {
     this.transactions = MOCK_TRANSACTIONS;
@@ -60,10 +60,13 @@ export class Tab3Page implements OnInit {
       iban,
       amount
     }).subscribe(data => {
-      this.total += amount;
-      this.balance -= amount;
-
-      this.displayPendingTransaction();
+      if ((data as any).accepted) {
+        this.total += amount;
+        this.balance -= amount;
+        this.displayConfirmationToast();
+      } else {
+        this.displayPendingTransaction();
+      }
     });
   }
 
@@ -124,7 +127,7 @@ export class Tab3Page implements OnInit {
     Object.keys(data).forEach(category => this.labels.push({
       label: category,
       pct: ((data[category] / this.total) * 100).toFixed(2),
-      progressBarAmount: data[category]/this.total,
+      progressBarAmount: data[category] / this.total,
       amount: data[category]
     }));
 

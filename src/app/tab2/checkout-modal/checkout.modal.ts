@@ -26,7 +26,11 @@ export class CheckoutModal implements OnInit {
 
   wsConnect() {
     this.payment$ = this.paymentInitService.getPaymentsSubject().subscribe((msg) => {
-      this.paymentDone = true;
+      if (msg.approved) {
+        this.paymentDone = true;
+      } else {
+        //
+      }
     });
   }
 
