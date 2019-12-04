@@ -130,6 +130,7 @@ export class Tab1Page implements OnInit {
       header: 'New payment from Francine',
       message: 'Click to Close',
       position: 'bottom',
+      color: 'secondary',
       buttons: [
         {
           text: 'See',
