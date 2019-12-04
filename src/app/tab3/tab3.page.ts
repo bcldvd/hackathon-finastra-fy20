@@ -59,7 +59,7 @@ export class Tab3Page implements OnInit {
       iban,
       amount
     }).subscribe(data => {
-      if ((data as any).accepted) {
+      if ((data as any).approved) {
         this.total += amount;
         this.balance -= amount;
         this.displayConfirmationToast();
