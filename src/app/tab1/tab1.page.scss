@@ -1,7 +1,6 @@
 .welcome-message {
   --min-height: 60px;
   .avatar-holder {
-    //border: 1px solid lightgray;
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -16,6 +15,7 @@
   h4 {
     display: flex;
     font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-weight: 400;
   }
   p {
     margin-left: 16px;
@@ -70,4 +70,9 @@
 
 .account-chart {
   padding: 8px;
+}
+
+.header-text {
+  padding: 0;
+  opacity: 0.6;
 }

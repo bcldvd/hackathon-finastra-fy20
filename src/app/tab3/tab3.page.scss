@@ -54,12 +54,12 @@
   background :lightgray;
   position: relative;
   margin: 0 16px;
+  opacity: 0.6;
 }
 
 .welcome-message {
   --min-height: 60px;
   .avatar-holder {
-    border: 1px solid lightgray;
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -69,11 +69,12 @@
     justify-content: center;
   }
   .avatar {
-    width: 22px;
+    width: 40px;
   }
   h4 {
     display: flex;
     font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-weight: 400;
   }
   p {
     margin-left: 16px;
@@ -132,15 +133,15 @@
     &.category-food {
       --progress-background:#d2d755; // lime
     }
-  
+
     &.category-clothing {
       --progress-background:#694ed6; // violet
     }
-  
+
     &.category-transportation {
       --progress-background:#c137a2; // fuchsia
     }
-  
+
     &.category-donation {
       --progress-background:#f0b323; // gold
     }
@@ -153,4 +154,9 @@
 
 .date-select {
   font-size: 14px;
+}
+
+.header-text {
+  padding: 0;
+  opacity: 0.6;
 }
