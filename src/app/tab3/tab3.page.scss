@@ -16,11 +16,10 @@
   max-height: 40px;
   &.text {
     font-size: 14px;
-    //align-items: flex-end;
   }
   &.amount {
     font-weight: bold;
-    font-family: Futura;
+    font-family: Futura,Trebuchet MS,Arial,sans-serif;
     font-size: 28px;
   }
   &.accent {
