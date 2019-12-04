@@ -59,10 +59,14 @@ export class Tab3Page implements OnInit {
       iban,
       amount
     }).subscribe(data => {
-      this.total += amount;
-      this.balance -= amount;
+      if ((data as any).accepted) {
+        this.total += amount;
+        this.balance -= amount;
 
-      this.displayConfirmationToast();
+        this.displayConfirmationToast();
+      } else {
+        //
+      }
     });
   }
 
@@ -114,7 +118,7 @@ export class Tab3Page implements OnInit {
     Object.keys(data).forEach(category => this.labels.push({
       label: category,
       pct: ((data[category] / this.total) * 100).toFixed(2),
-      progressBarAmount: data[category]/this.total,
+      progressBarAmount: data[category] / this.total,
       amount: data[category]
     }));
 
