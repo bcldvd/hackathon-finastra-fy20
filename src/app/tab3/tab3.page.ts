@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-import { ToastController } from '@ionic/angular';
+import { ToastController, AlertController } from '@ionic/angular';
 import { Chart } from 'chart.js';
 import { NO_CORDOVA, CATEGORY_IONIC_ICON_MAPPER } from '../shared/data';
 import { PaymentInitService } from '../shared/payment-init.service';
@@ -27,6 +27,7 @@ export class Tab3Page implements OnInit {
     private barcodeScanner: BarcodeScanner,
     private paymentInitService: PaymentInitService,
     public toastController: ToastController,
+    public alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -61,12 +62,20 @@ export class Tab3Page implements OnInit {
       if ((data as any).accepted) {
         this.total += amount;
         this.balance -= amount;
-
         this.displayConfirmationToast();
       } else {
-        //
+        this.displayPendingTransaction();
       }
     });
+  }
+
+  async displayPendingTransaction() {
+    const alert = await this.alertController.create({
+      header: 'Pending Transaction',
+      message: 'This transaction is waiting for an approval.'
+    });
+
+    await alert.present();
   }
 
   async displayConfirmationToast() {
