@@ -71,14 +71,14 @@ export class Tab1Page implements OnInit {
           backgroundColor: '#efcce7',
           borderColor: '#c137a2',
           fill: true,
-          data: [54, 75, 120, 82, 65, 15]
+          data: [54.18, 75.05, 120.99, 82.07, 65.55, 15.23]
         }]
       },
       options: {
         responsive: true,
         title: {
           display: true,
-          text: 'Expense history'
+          text: 'Expense History'
         },
         scales: {
           yAxes: [{
