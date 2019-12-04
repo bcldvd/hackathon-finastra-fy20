@@ -45,7 +45,7 @@ export class Tab1Page implements OnInit {
 
     this.transactions = MOCK_TRANSACTIONS;
 
-    let data = [150, 130, 95];
+    let data = [150.41, 130.25, 95.08];
     Object.keys(this.transactions).forEach(key => {
       let total = 0;
       this.transactions[key].transactions.forEach((t: Transaction) => {
@@ -77,6 +77,8 @@ export class Tab1Page implements OnInit {
           yAxes: [{
             type: 'linear',
             ticks: {
+              beginAtZero: true,
+              stepSize: 50,
               userCallback: function (tick) {
                 return '$' + tick.toString();
               }
