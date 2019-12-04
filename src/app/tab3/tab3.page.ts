@@ -6,8 +6,6 @@ import { NO_CORDOVA, CATEGORY_IONIC_ICON_MAPPER } from '../shared/data';
 import { PaymentInitService } from '../shared/payment-init.service';
 import { MOCK_TRANSACTIONS, TransactionByDate } from '../shared/data';
 
-Chart.defaults.global.legend.labels.usePointStyle = true;
-
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
@@ -28,7 +26,9 @@ export class Tab3Page implements OnInit {
     private barcodeScanner: BarcodeScanner,
     private paymentInitService: PaymentInitService,
     public toastController: ToastController,
-  ) {}
+  ) {
+    Chart.defaults.global.legend.labels.usePointStyle = true;
+  }
 
   ngOnInit() {
     this.transactions = MOCK_TRANSACTIONS;

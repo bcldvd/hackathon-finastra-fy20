@@ -65,6 +65,13 @@ export class Tab1Page implements OnInit {
           borderColor: '#694ed6',
           fill: true,
           data
+        },
+        {
+          label: 'Axel',
+          backgroundColor: '#efcce7',
+          borderColor: '#c137a2',
+          fill: true,
+          data: [54, 75, 120, 82, 65, 15]
         }]
       },
       options: {
