@@ -5,7 +5,7 @@ export const CATEGORY_IONIC_ICON_MAPPER = {
   Transportation: 'train',
   Clothing: 'shirt',
   House: 'home',
-  Donation: 'heart'
+  Donations: 'heart'
 };
 
 export interface TransactionByDate {
@@ -71,7 +71,7 @@ export const MOCK_TRANSACTIONS: TransactionByDate[] = [
       },
       {
         name: 'WWF',
-        category: 'Donation',
+        category: 'Donations',
         amount: 6.50
       }
     ]

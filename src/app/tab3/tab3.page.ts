@@ -152,7 +152,7 @@ export class Tab3Page implements OnInit {
           colors.push('#c137a2');
           break;
         }
-        case 'Donation': {
+        case 'Donations': {
           colors.push('#f0b323');
           break;
         }
