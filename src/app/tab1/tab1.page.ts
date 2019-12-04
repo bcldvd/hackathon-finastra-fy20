@@ -20,6 +20,20 @@ export class Tab1Page implements OnInit {
 
   @ViewChild('lineCanvas', { static: true }) lineCanvas: ElementRef;
 
+  balance = 3250;
+  kidBalanceList = [{
+    name: "Francine",
+    limit: 65,
+    balance: 35,
+    pct: 0
+  },
+  {
+    name: "Axel",
+    limit: 150,
+    balance: 140,
+    pct: 0
+  }]
+
   constructor(
     public toastController: ToastController,
     public modalController: ModalController,
@@ -71,6 +85,10 @@ export class Tab1Page implements OnInit {
         }
       }
     });
+
+    for (let i =0; i < this.kidBalanceList.length; i++) {
+      this.kidBalanceList[i].pct = (1 - (this.kidBalanceList[i].balance / this.kidBalanceList[i].limit)) * 100;
+    }
   }
 
   wsConnect() {

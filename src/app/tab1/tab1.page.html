@@ -24,25 +24,48 @@
 
 <ion-content>
   <ion-card>
+    <ion-card-content class="account-info">
+      <ion-grid>
+        <ion-row>
+          <ion-col class="centered text">
+            <div>Current Balance</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="centered amount accent">
+            <div>${{balance | number:'1.2-2'}}</div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
     <ion-card-content class="account-chart">
       <canvas #lineCanvas height="250"></canvas>
     </ion-card-content>
   </ion-card>
 
   <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>
-        My kids
-      </ion-card-subtitle>
-    </ion-card-header>
-    <ion-list lines="none">
-      <ion-item (click)="displayTransactions('Francine')">
-        <ion-avatar slot="start">
-          <img src="assets/francine.png">
-        </ion-avatar>
-        <ion-label>Francine</ion-label>
-      </ion-item>
-    </ion-list>
+    <ion-card-content>
+      <ion-list>
+        <ion-list-header class="expenses-header">Family Ring</ion-list-header>
+        <ion-row *ngFor="let kid of kidBalanceList" class="transaction-row" (click)="displayTransactions('Francine')">
+          <ion-col size="2">
+            <ion-avatar class="kid-avatar">
+              <img class="avatar" src="assets/{{kid.name.toLowerCase()}}.png" />
+            </ion-avatar>
+          </ion-col>
+          <ion-col class="kid-info">
+            <div class="kid-amounts">
+              <p class="transaction-font">{{kid.name}}&nbsp;&nbsp;{{kid.pct | number:'1.2-2' }}%</p>
+              <p class="transaction-font">${{kid.balance | number:'1.2-2' }}</p>
+            </div>
+            <ion-progress-bar class="transaction-progress-bar" color="primary" [value]="kid.pct/100"></ion-progress-bar>
+          </ion-col>
+        </ion-row>
+      </ion-list>
+    </ion-card-content>
   </ion-card>
 
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
