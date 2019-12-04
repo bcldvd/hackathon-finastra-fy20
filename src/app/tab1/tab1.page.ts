@@ -21,18 +21,7 @@ export class Tab1Page implements OnInit {
   @ViewChild('lineCanvas', { static: true }) lineCanvas: ElementRef;
 
   balance = 3250;
-  kidBalanceList = [{
-    name: 'Francine',
-    limit: 65,
-    balance: 35,
-    pct: 0
-  },
-  {
-    name: 'Axel',
-    limit: 150,
-    balance: 140,
-    pct: 0
-  }];
+  kidBalanceList: any[];
 
   constructor(
     public toastController: ToastController,
@@ -89,9 +78,18 @@ export class Tab1Page implements OnInit {
       }
     });
 
-    for (let i =0; i < this.kidBalanceList.length; i++) {
-      this.kidBalanceList[i].pct = (1 - (this.kidBalanceList[i].balance / this.kidBalanceList[i].limit)) * 100;
-    }
+    this.kidBalanceList = [{
+      name: "Francine",
+      limit: 64.38,
+      balance: 64.38 - MOCK_TRANSACTIONS[1].transactions.map(t => t.amount).reduce((a,b) => a + b),
+      pct: (1 - (64.38 - MOCK_TRANSACTIONS[1].transactions.map(t => t.amount).reduce((a,b) => a + b))/64.38) * 100
+    },
+    {
+      name: "Axel",
+      limit: 150,
+      balance: 135,
+      pct: (1 - 135/150) * 100
+    }];
   }
 
   wsConnect() {
@@ -99,6 +97,7 @@ export class Tab1Page implements OnInit {
       const kid = 'Francine';
       if (msg.approved) {
         this.presentNewPaymentToast(kid, msg.amount);
+        this.kidBalanceList[0].balance = this.kidBalanceList[0].balance + msg.amount;
       } else {
         this.presentAlertUnusualTransaction(kid, msg.amount);
       }
